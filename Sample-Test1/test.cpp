@@ -1,20 +1,23 @@
 #include "pch.h"
 #include "../Project37/similarity_checker.cpp"
 
-TEST(TestCaseName, TestName1) {
+TEST(LengthScoreTest, LenSame) {
 	SimilarityChecker sc{ "ABCDE" };
-	int ret = sc.getLengthScore("ABCDE");
-	EXPECT_EQ(ret, 60);
+	double ret = sc.getLengthScore("ABCDE");
+	EXPECT_DOUBLE_EQ(ret, 60);
 }
 
-TEST(TestCaseName, TestName2) {
+TEST(LengthScoreTest, LenTwiceThan) {
 	SimilarityChecker sc{ "ABCDE" };
-	int ret = sc.getLengthScore("AB");
-	EXPECT_EQ(ret, 0);
+	double ret = sc.getLengthScore("AB");
+	EXPECT_DOUBLE_EQ(ret, 0);
 }
 
-TEST(TestCaseName, TestName3) {
+TEST(LengthScoreTest, LenSubscore) {
 	SimilarityChecker sc{ "ABCDE" };
-	int ret = sc.getLengthScore("ABC");
-	EXPECT_EQ(ret, 20);
+	double ret = sc.getLengthScore("ABC");
+	EXPECT_DOUBLE_EQ(ret, 20);
+
+	ret = sc.getLengthScore("ABCD");
+	EXPECT_DOUBLE_EQ(ret, 45);
 }
