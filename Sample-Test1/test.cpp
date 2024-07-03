@@ -12,3 +12,9 @@ TEST(TestCaseName, TestName2) {
 	int ret = sc.getLengthScore("AB");
 	EXPECT_EQ(ret, 0);
 }
+
+TEST(TestCaseName, TestName3) {
+	SimilarityChecker sc{ "ABCDE" };
+	int ret = sc.getLengthScore("ABC");
+	EXPECT_EQ(ret, 20);
+}

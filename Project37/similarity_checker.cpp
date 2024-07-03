@@ -13,7 +13,18 @@ public:
 
 		if (ansLen == userLen)	return 60;
 		if ((ansLen >= userLen * 2) || (ansLen * 2 <= userLen))	return 0;
-		return 0;
+		
+		double longLen, shortLen;
+		if (ansLen > userLen) {
+			longLen = ansLen;
+			shortLen = userLen;
+		}
+		else {
+			longLen = userLen;
+			shortLen = ansLen;
+		}
+
+		return (1 - (longLen - shortLen) / shortLen) * 60;
 	}
 
 private:
