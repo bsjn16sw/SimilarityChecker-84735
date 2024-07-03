@@ -8,7 +8,8 @@ public:
 
 	}
 	int getLengthScore(const string& userStr) {
-		return 60;
+		if (ansStr.length() == userStr.length())	return 60;
+		return 0;
 	}
 
 private:
