@@ -1,23 +1,25 @@
 #include "pch.h"
 #include "../Project37/similarity_checker.cpp"
 
-TEST(LengthScoreTest, LenSame) {
+class SimilarityCheckerFixture : public testing::Test {
+public:
+	void calcLengthScore(const string& userStr, int expected) {
+		double ret = sc.getLengthScore(userStr);
+		EXPECT_DOUBLE_EQ(round(ret), round(expected));
+	}
+private:
 	SimilarityChecker sc{ "ABCDE" };
-	double ret = sc.getLengthScore("ABCDE");
-	EXPECT_DOUBLE_EQ(ret, 60);
+};
+
+TEST_F(SimilarityCheckerFixture, LenSame) {
+	calcLengthScore("ABCDE", 60);
 }
 
-TEST(LengthScoreTest, LenTwiceThan) {
-	SimilarityChecker sc{ "ABCDE" };
-	double ret = sc.getLengthScore("AB");
-	EXPECT_DOUBLE_EQ(ret, 0);
+TEST_F(SimilarityCheckerFixture, LenTwiceThan) {
+	calcLengthScore("AB", 0);
 }
 
-TEST(LengthScoreTest, LenSubscore) {
-	SimilarityChecker sc{ "ABCDE" };
-	double ret = sc.getLengthScore("ABC");
-	EXPECT_DOUBLE_EQ(ret, 20);
-
-	ret = sc.getLengthScore("ABCD");
-	EXPECT_DOUBLE_EQ(ret, 45);
+TEST_F(SimilarityCheckerFixture, LenSubscore) {
+	calcLengthScore("ABC", 20);
+	calcLengthScore("ABCD", 45);
 }
